@@ -11,7 +11,7 @@ The 2025 Tanner crab assessment (with links to to the main document and appendic
   * https://meetings.npfmc.org/Meeting/Details/3097
 
 Description of the TCSAM02 model framework:
- * [documents/TCSAM02Description2026.pdf]
+ * [documents/TCSAM02Description2026.pdf](https://github.com/noaa-afsc/TannerCrab_2026CIEReview/blob/main/documents/TCSAM02Description2026.pdf)
 
 ## Links to assessment model frameworks
 TCSAM02, the bespoke model framework for the Tanner crab assessment (the current code is on the '202603' branch):

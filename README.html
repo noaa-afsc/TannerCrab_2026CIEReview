@@ -360,60 +360,170 @@ Bering Sea and Aleutian Islands (BSAI) Tanner crab assessment, which
 will be held June 9-11, 2026 at the Alaska Fisheries Science Center
 (Seattle, WA). The BSAI Tanner crab (<em>Chionoecetes bairdi</em>) stock
 is one of <a href="https://www.npfmc.org/fisheries/bsai-crab/">10 crab
-stocks</a> managed by the North Pacific Fishery Management Council (<a href="https://www.npfmc.org/about-the-council/">NPFMC</a>).</p>
-<div id="links-to-documents" class="section level2">
-<h2>Links to documents</h2>
-<p>The CIE Review agenda:</p>
+stocks</a> managed by the North Pacific Fishery Management Council (<a href="https://www.npfmc.org/about-the-council/">NPFMC</a>). The review
+will include a number of topics including: * assessment model transition
+from the current bespoke modeling framework (TCSAM02) to the framework
+used by the majority of BSAI crab stock assessments, the Generalized
+Model for Assessing Crustacean Stocks (GMACS) * issues related to
+management Tier level, management proxies for <span class="math inline">\(F_{MSY}\)</span> and <span class="math inline">\(B_{MSY}\)</span>, and OFL and ABC calculations *
+issues related to whether, and if so how, hybrid <em>Chionoecetes</em>
+should be included in the assessment * issues related spatial
+distribution, stock structure, and management</p>
+<div id="review-agenda" class="section level2">
+<h2>Review agenda</h2>
+<p>A pdf version of the current agenda is available at the following
+link:</p>
 <ul>
-<li><a href="https://github.com/noaa-afsc/TannerCrab_2026CIEReview/blob/main/documents/Tanner_Crab_CIE_Agenda_Table.pdf">documents/Tanner_Crab_CIE_Agenda_Table.pdf</a></li>
+<li><a href="documents/Tanner_Crab_CIE_Agenda_Table.pdf">Agenda</a></li>
 </ul>
-<div id="assessment-related-documents" class="section level3">
-<h3>Assessment-related documents</h3>
-<p>The 2025 Tanner crab assessment (with links to to the main document
-and appendices):</p>
+</div>
+<div id="assessment-related-documents" class="section level2">
+<h2>Assessment-related documents</h2>
+<p>The 2025 Tanner crab assessment is available as a set of pdfs (main
+document, appendices, presentation) at:</p>
 <ul>
 <li><a href="https://meetings.npfmc.org/Meeting/Details/3097">2025
 Tanner crab stock assessment</a></li>
-<li></li>
 </ul>
-<p>The May 2026 Tanner crab report to the (hybrid <em>Chionoecetes</em>
-impacts, recent GMACS developments):</p>
+<p>The assessment describes the process by which federal management
+quantities and harvest levels were determined, as well as the
+then-current (Sept., 2025) state of transition from TCAM02 to GMACS.</p>
+<p>The May 2026 Tanner crab report to the NPFMC’s Crab Plan Team (CPT)
+consists of files at the following links:</p>
 <ul>
-<li><a href="https://github.com/noaa-afsc/TannerCrab_2026CIEReview/blob/main/documents/TannerCrabReport_2026-05.pdf">documents/TannerCrabReport_2026-05.pdf</a></li>
-<li><a href="documents/TannerCrabReport_2026-05_Addendum.pdf">documents/TannerCrabReport_2026-05_Addendum.pdf</a></li>
-<li><a href="documents/AFSC.EBS.CrabSurvey2025.NOAA-TM-AFSC_513.pdf">documents/TannerCrabReport_2026-05_Presentation.pdf</a></li>
+<li><a href="documents/TannerCrabReport_2026-05.pdf">Report</a></li>
+<li><a href="documents/TannerCrabReport_2026-05_Addendum.pdf">Addendum</a></li>
+<li><a href="documents/TannerCrabReport_2026-05_Presentation.pdf">Presentation</a></li>
 </ul>
-<div id="management-tier-system" class="section level4">
-<h4>Management Tier System</h4>
+<p>The report and addendum discuss recent changes to GMACS that provide
+functionality equivalent to the bespoke Tanner crab modeling framework
+(TCSAM02) and the current state of matching models between the two
+frameworks. It also provides a preliminary discussion on the issue of
+including <em>Chionoecetes spp.</em> hybrids in the Tanner crab
+assessment.</p>
+<div id="nmfs-eastern-bering-sea-trawl-survey" class="section level3">
+<h3>NMFS Eastern Bering Sea Trawl Survey</h3>
+<p>The NMFS eastern Bering Sea Trawl Survey (EBS trawl survey) is the
+primary non-fishery data source for the Tanner crab assessment. A
+comprehensive discussion of results from the 2025 survey can be found <a href="documents/AFSC.EBS.CrabSurvey2025.NOAA-TM-AFSC_513.pdf">here</a>.</p>
+</div>
+</div>
+<div id="assessment-model-frameworks" class="section level2">
+<h2>Assessment model frameworks</h2>
+<div id="tcsam02-the-bespoke-framework" class="section level3">
+<h3>TCSAM02 (the bespoke framework)</h3>
+<p>TCSAM02 is the bespoke size structured modeling framework for the
+Tanner crab assessment. Written in <a href="https://www.admb-project.org">ADMB</a> tpl and C++, it was adopted
+in for the assessment 2017 and has been updated on at least an annual
+basis to address different issues and provide different options for the
+assessment. The code is hosted on <a href="https://github.com/wStockhausen/tcsam02/tree/202603">GitHub</a>;
+the current branch is ‘202603’. <a href="https://github.com/wStockhausen/wtsADMB">wtsADMB</a> provides a
+library of ADMB-compatible C++ functions used in TCSAM02. A
+constellation of R packages (principally <a href="https://github.com/wStockhausen/rTCSAM02">rTCSAM02</a> and <a href="https://github.com/wStockhausen/rCompTCMs">rCompTCMs</a>) have
+evolved to extract and compare results between alternative models in
+various formats.</p>
+<p>A detailed description of the TCSAM02 modeling framework is available
+<a href="documents/TCSAM02Description2026.pdf">here</a>.</p>
+<p>Input files to run the TCSAM02 model are available in a zip file <a href="model_files/TCSAM02/TCSAM02_InputFiles.zip">here</a>. An
+OSX-compatible executable and shell script are available <a href="model_files/TCSAM02/tcsam02">here</a> and <a href="model_files/TCSAM02/run_tcsam02_osx.sh">here</a>. A
+Windows-compatible executable and batch file are available <a href="model_files/TCSAM02/tcsam02.exe">here</a> and <a href="model_files/TCSAM02/run_tcsam02_bat.sh">here</a>.</p>
+<p>To run the model (if you really want to):</p>
+<ul>
+<li>extract files in the zip file to a folder (the “top-level
+folder”)</li>
+<li>copy the tcsam02 executable (tcsam02 or tcsam02.exe) to the
+top-level folder
+<ul>
+<li>you may have to set permissions to allow the executable to run</li>
+</ul></li>
+<li>create a sub-folder “run” and copy the shell script or batch file
+into it
+<ul>
+<li>you may have to set permissions to allow the shell script/batch file
+to run</li>
+</ul></li>
+<li>run the shell script/batch file from a terminal/command window
+opened in the sub-folder</li>
+</ul>
+<p>The model should run twice: the first time to estimate model
+parameters at an approximate MLE then invert the hessian and estimate
+the covariance matrix, the second time to apply the “hess_step”
+procedure to determine the “true” MLE (all parameter gradients zero)
+then invert the hessian and estimate the covariance matrix and “std”
+file. Applying the “hess_step” procedure is probably overkill but
+provides peace-of-mind that the true (but still possibly local) maximum
+in the likelihood surface has been found.</p>
+<p>If you have installed the necessary R packages, you can run the
+scripts in the “r_step1…” and “r_step2…” files to extract the results to
+an RData file and plot various quantities. The RData file (the result of
+running “r_step1…”) can also be found <a href="model_files/TCSAM02/Results.RData">here</a>.</p>
+</div>
+<div id="gmacs-the-new-framework" class="section level3">
+<h3>GMACS (the “new” framework)</h3>
+<p>The Generalized Model for Assessing Crustacean Stocks, GMACS, is the
+modeling framework the assessment is in the process of transitioning to.
+It is also written in ADMB/C++. The principal reason for the transition
+is that GMACS is the modeling framework for the majority of BSAI crab
+stocks. It provides a single framework for both <em>Chionoecetes</em>
+and king crab life histories whereas TCSAM02 is specifically focused on
+Tanner crab. The <a href="https://github.com/GMACS-project">GMACS
+Project</a> provides an organizing framework for repositories related to
+GMACS. The <a href="https://github.com/GMACS-project/GMACS_tpl-cpp_code">GMACS_tpl-cpp_code</a>
+repository hosts the latest <a href="https://github.com/GMACS-project/GMACS_tpl-cpp_code/tree/devel_202605">version</a>
+of GMACS, which includes several recent additions to provide features
+found in the bespoke model. While several R packages have been developed
+to extract and present results from GMACS models, the R package <a href="https://github.com/wStockhausen/wtsGMACS">wtsGMACS</a> facilitates
+direct comparisons with TCSAM02 models.</p>
+<p>Input files to run the GMACS model are available in a zip file <a href="model_files/GMACS/GMACS_InputFiles.zip">here</a>. An
+OSX-compatible executable and shell script are available <a href="model_files/GMACS/tcsam02">here</a> and <a href="model_files/GMACS/run_tcsam02_osx.sh">here</a>. A
+Windows-compatible executable and batch file are available <a href="model_files/GMACS/gmacs.exe">here</a> and <a href="model_files/GMACS/run_tcsam02_bat.sh">here</a>.</p>
+<p>To run the model:</p>
+<ul>
+<li>extract files in the zip file to a folder (the “top-level
+folder”)</li>
+<li>copy the gmacs executable (gmacs or gmacs.exe) to the top-level
+folder
+<ul>
+<li>you may have to set permissions to allow the executable to run</li>
+</ul></li>
+<li>create a sub-folder “run1” and copy the shell script or batch file
+into it
+<ul>
+<li>you may have to set permissions to allow the shell script/batch file
+to run</li>
+</ul></li>
+<li>run the shell script/batch file from a terminal/command window
+opened in the sub-folder</li>
+</ul>
+<p>The <a href="model_files/GMACS/gmacs.rep1">“gmacs.rep1”</a> is the
+main results file, although many other ancillary files are produced for
+a model run. If you have the necessary R packages installed, you can run
+the scripts in “r_CheckRep1.Run1a.R” and “r_CheckRep2.Run1a.R” to make
+plots comparing results from the bespoke model and GMACS. Note that <a href="model_runs/GMACS/rda_gmacs_rep.RData">“rda_gmacs_rep.RData”</a>
+provides the version of “gmacs.rep1” already converted to R format.</p>
+</div>
+</div>
+<div id="hybrid-chionoecetes-spp." class="section level2">
+<h2>Hybrid Chionoecetes spp.</h2>
+<ul>
+<li><a href="presentations/HybridConsiderations.pdf">Hybrid
+considerations</a></li>
+</ul>
+</div>
+<div id="management-tier-system-and-proxies-for-f_msy-and-b_msy" class="section level2">
+<h2>Management Tier System and Proxies for <span class="math inline">\(F_{MSY}\)</span> and <span class="math inline">\(B_{MSY}\)</span></h2>
 <p>The NPFMC’s management tier system for assessing Bering Sea and
-Aletian Islands crab staocks is described here:</p>
+Aleutian Islands crab stocks is described here:</p>
 <ul>
-<li><a href="https://github.com/noaa-afsc/TannerCrab_2026CIEReview/blob/main/documents/2025.SAFE_Intro_TierSystem.pdf">Tier
+<li><a href="documents/2025.SAFE_Intro_TierSystem.pdf">Tier
 system</a></li>
 </ul>
-<p>Description of the TCSAM02 model framework:</p>
-<ul>
-<li><a href="https://github.com/noaa-afsc/TannerCrab_2026CIEReview/blob/main/documents/TCSAM02Description2026.pdf">documents/TCSAM02Description2026.pdf</a></li>
-</ul>
-<p>2025 NMFS Eastern Bering Sea Trawl Survey</p>
-<ul>
-<li><a href="https://github.com/noaa-afsc/TannerCrab_2026CIEReview/blob/main/documents/TannerCrabReport_2026-05_Presentation.pdf">2025
-NMFS Eastern Bering Sea Trawl Survey</a></li>
-</ul>
 </div>
-</div>
-</div>
-<div id="links-to-assessment-model-frameworks" class="section level2">
-<h2>Links to assessment model frameworks</h2>
-<p>TCSAM02, the bespoke model framework for the Tanner crab assessment
-(the current code is on the ‘202603’ branch):</p>
+<div id="spatial-considerations-and-potential-stock-structure" class="section level2">
+<h2>Spatial considerations and potential stock structure</h2>
 <ul>
-<li><a href="https://github.com/wStockhausen/tcsam02/tree/202603" class="uri">https://github.com/wStockhausen/tcsam02/tree/202603</a></li>
-</ul>
-<p>GMACS, the modeling framework the assessment is in the process of
-transitioning to (the current code is on the ‘devel_202605’ branch):</p>
-<ul>
-<li><a href="https://github.com/GMACS-project/GMACS_tpl-cpp_code/tree/devel_202605" class="uri">https://github.com/GMACS-project/GMACS_tpl-cpp_code/tree/devel_202605</a></li>
+<li><a href="presentations/SpatialConsiderations.pdf">Spatial
+considerations</a></li>
 </ul>
 </div>
 </div>

@@ -108,7 +108,7 @@ to R format.
 
 The NPFMC's management tier system for assessing Bering Sea and Aleutian Islands crab stocks is described [here](documents/2025.SAFE_Intro_TierSystem.pdf). The 
 Tanner crab stock is assessed in Tier 3, which uses SPR-derived proxies for $F_{MSY}$ and $B_{MSY}$ to determine the federal overfishing limit (OFL) for the stock. 
-For Tier 3, the proxies are $F_{MSY} = F_{35%}$ and $B_{MSY} = B_{35%}$. The [presentation](presentations/ReferencePointsAndTierConsiderations.pdf) will be used to 
+For Tier 3, the proxies are $F_{MSY} = F_{35\%}$ and $B_{MSY} = B_{35\%}$. The [presentation](presentations/ReferencePointsAndTierConsiderations.pdf) will be used to 
 motivate discussion on whether other SPR rates might be more appropriate for achieving sustainable harvest rates given a closer examination of Tanner crab life history.
  
 ## Spatial considerations and potential stock structure

@@ -177,7 +177,28 @@ an be found [here](https://meetings.npfmc.org/CommentReview/DownloadFile?p=a1c76
 
 ## Side-by-side selectivity studies
 
+Side-by-side (SBS) trawling experiments were first conducted jointly by the National Marine
+Fisheries’ Alaska Science Center (NMFS AFSC) and the Bering Sea Fisheries Research Foundation
+(BSFRF) in the eastern Bering Sea (EBS) in 2009 and 2010 at standard NMFS EBS Shelf Survey stations in the northwest of the
+EBS shelf survey grid to characterize the selectivity of the NMFS bottom trawl survey gear for
+snow crab, *Chionoecetes opiliio* (Somerton et al. 2013). Similar studies were conducted in 2013,
+2014, 2015, and 2016 in the southeastern EBS (Bristol Bay) to characterize the selectivity of the
+NMFS bottom trawl survey gear for red king crab (*Paralithodes camtschaticus*) and Tanner crab
+(*C. bairdi*), as well as further west on the EBS shelf in 2017 and 2018 to focus more
+specifically on Tanner and snow crab.
 
+In the current assessment model, annual survey biomass indices and size compositions from the BSFRF hauls are 
+fit assuming they are absolute indices of abundance (i.e., *q* = 1) within the areas in which the BSFRF surveys were conducted. 
+Incorporating these data into the assessment helps to determine the overall scale of the more comprehensive (in both space and time) 
+relative indices provided by the NMFS EBS survey. An alternative approach to incorporating the BSFRF data into the assessment, 
+rather than directly fitting the BSFRF biomass indices and size compositions in the model, has been to use the side-by-side, paired haul 
+nature of the joint BSFRF-NMFS data to estimate the size selectivity of the NMFS gear outside the assessment model and use the 
+results to inform survey selectivity within it. While not complete at this point, the CIE reviewers are asked to review the 
+analysis to date and make recommendations on the steps needed to complete it ([link](documents/TannerCrab_SBS_Analysis.pdf)). Of note, 
+the linked draft tech memo includes a haul-level analysis of the data for male Tanner crab but not for females; the 
+latter follows an approach similar to that taken for males but the relevant section has not been written. 
+
+A presentation on the side-by-side selectivity studies is available [here](presentations/SBS_Selectivity.pdf).
 
 ## Management Tier System and Proxies for $F_{MSY}$ and $B_{MSY}$
 
@@ -188,15 +209,33 @@ motivate discussion on whether other SPR rates might be more appropriate for ach
  
 ## Spatial considerations and potential stock structure
 
-  * [Spatial considerations](presentations/SpatialConsiderations.pdf)
+Federal fisheries management treats Tanner crab in the EBS as a single stock: the stock assessment model 
+fits survey and fishery data aggregated across the entire shelf and produces a single OFL and ABC for the entire area. 
+In contrast, the State of Alaska sets separate TACs for the areas east and west of 166^o^W longitude 
+based on area-specific harvest control rules. While Tanner crab in the EBS are regarded as a single stock, 
+the population exhibits environmentally-driven and perhaps simply random annual changes on top of a fair degree of 
+consistent or slowly-varying spatial structure together with annual changes. The reviewers are asked to consider the 
+brief introduction presented in this [document](documents/TannerCrab_SpatialConsiderations.pdf) and consider whether future 
+development of the assessment should quantitatively address spatial aspects of the stock. The figures are also provided in the 
+[Spatial considerations](presentations/SpatialConsiderations.pdf) presentation.
 
 
 # References
 
-CPT 2025
+[CPT Report 2025](https://meetings.npfmc.org/CommentReview/DownloadFile?p=3506263a-4da3-4d77-aafb-ffbc694b69ef.pdf&fileName=C3%20CPT%20Report.pdf)
 
-SSC 2025
+[SSC Report 2025](https://meetings.npfmc.org/CommentReview/DownloadFile?p=bb3958b1-c8ca-42ab-9391-c5673c6e9872.pdf&fileName=SSC%20Report%20Oct%202025_FINAL.pdf)
+
+Somerton, D.A., Weinberg, K.L., and Goodman, S.E. 2013. Catchability of snow crab
+(*Chionoecetes opilio*) by the eastern bering sea bottom trawl survey estimated using
+a catch comparison experiment. Can. J. Fish. Aquat. Sci. 70: 1699–1708.
+doi:dx.doi.org/10.1139/cjfas-2013-0100.
+
+Thygesen,U.H., K. Kristensen, T. Jansen, J.E. Beyer. 2019. Intercalibration of survey methods using paired fishing operations and log-Gaussian Cox processes. 
+ICES Journal of Marine Science, 76:1189–1199. https://doi.org/10.1093/icesjms/fsy191
 
 Zacher, L.S., Hennessey, S.M., Richar, J.I., Fedewa, E.J., Ryznar, E.R., and Litzow, M.A. 2026. The
 2025 eastern and northern Bering Sea continental shelf trawl surveys: Results for commercial
-crab species. U.S. National Oceanic and Atmospheric Administration (NOAA).https://repository.library.noaa.gov/view/noaa/72630
+crab species. U.S. National Oceanic and Atmospheric Administration (NOAA). https://repository.library.noaa.gov/view/noaa/72630
+
+

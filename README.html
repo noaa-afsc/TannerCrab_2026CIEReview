@@ -361,14 +361,22 @@ will be held June 9-11, 2026 at the Alaska Fisheries Science Center
 (Seattle, WA). The BSAI Tanner crab (<em>Chionoecetes bairdi</em>) stock
 is one of <a href="https://www.npfmc.org/fisheries/bsai-crab/">10 crab
 stocks</a> managed by the North Pacific Fishery Management Council (<a href="https://www.npfmc.org/about-the-council/">NPFMC</a>). The review
-will include a number of topics including: * assessment model transition
-from the current bespoke modeling framework (TCSAM02) to the framework
-used by the majority of BSAI crab stock assessments, the Generalized
-Model for Assessing Crustacean Stocks (GMACS) * issues related to
-management Tier level, management proxies for <span class="math inline">\(F_{MSY}\)</span> and <span class="math inline">\(B_{MSY}\)</span>, and OFL and ABC calculations *
-issues related to whether, and if so how, hybrid <em>Chionoecetes</em>
-should be included in the assessment * issues related spatial
-distribution, stock structure, and management</p>
+will include a number of topics including:</p>
+<ul>
+<li>assessment model transition from the current bespoke modeling
+framework (TCSAM02) to the framework used by the majority of BSAI crab
+stock assessments, the Generalized Model for Assessing Crustacean Stocks
+(GMACS)</li>
+<li>issues related to whether, and if so how, hybrid
+<em>Chionoecetes</em> should be included in the assessment</li>
+<li>issues related to the use of “side-by-side” survey data from gear
+calibration studies</li>
+<li>issues related to management Tier level, management proxies for
+<span class="math inline">\(F_{MSY}\)</span> and <span class="math inline">\(B_{MSY}\)</span>, and OFL and ABC
+calculations</li>
+<li>issues related spatial distribution, stock structure, and
+management</li>
+</ul>
 <div id="review-agenda" class="section level2">
 <h2>Review agenda</h2>
 <p>A pdf version of the current agenda is available at the following
@@ -406,6 +414,9 @@ assessment.</p>
 <p>The NMFS eastern Bering Sea Trawl Survey (EBS trawl survey) is the
 primary non-fishery data source for the Tanner crab assessment. A
 comprehensive discussion of results from the 2025 survey can be found <a href="documents/AFSC.EBS.CrabSurvey2025.NOAA-TM-AFSC_513.pdf">here</a>.</p>
+</div>
+<div id="adfg-fisheries" class="section level3">
+<h3>ADFG Fisheries</h3>
 </div>
 </div>
 <div id="assessment-model-frameworks" class="section level2">
@@ -503,12 +514,131 @@ plots comparing results from the bespoke model and GMACS. Note that <a href="mod
 provides the version of “gmacs.rep1” already converted to R format.</p>
 </div>
 </div>
-<div id="hybrid-chionoecetes-spp." class="section level2">
-<h2>Hybrid Chionoecetes spp.</h2>
+<div id="tcsam02-to-gmacs-bridging-analysis" class="section level2">
+<h2>TCSAM02 to GMACS bridging analysis</h2>
+<p>The Tanner crab assessment has been based on the Tanner Crab Stock
+Assessment Model, version 2, (TCSAM02) modeling framework for over 10
+years. The framework consists of an AD Model Builder C++ template,
+native C++ code in several additional source and include files, and the
+C++ library wtsADMB. Although the framework has many options for
+defining an implemented “model”, the characteristics of its current
+population dynamics are limited to <em>Chionoecetes</em> species (i.e.,
+Tanner crab and snow crab) that exhibit a terminal molt to maturity and
+thus cannot be applied to, e.g., king crab species. Consequently,
+TCSAM02 does not provide a unified modeling framework for Alaskan crab
+stocks in a manner similar to that of the Generalized Model for
+Assessing Crustacean Stocks (GMACS). For several years, the SSC has
+requested that the Tanner crab assessment be moved to the GMACS
+framework so that all BSAI crab stocks are assessed using the framework,
+but it and the CPT have also indicated the necessity (CPT 2024, SSC
+2024) that a detailed bridging analysis from the bespoke model be
+conducted that demonstrates the resulting GMACS model is “exactly
+equivalent” to the bespoke model before the transition from TCSAM02 to
+GMACS should occur for the Tanner crab assessment. Up to now, three of
+the major barriers to development of an “exactly equivalent” GMACS
+Tanner crab model have been: 1) that several features utilized in the
+bespoke model have not been available in GMACS, 2) that results were not
+consistently reported between the two frameworks, and 3) that functions
+did not exist that allowed comparison of results between the two models.
+From the September 2025 assessment to just prior to the May 2026 CPT
+meeting, these barriers have, on the whole, been surmounted. In the <a href="documents/TannerCrabReport_2026-05.pdf">report</a> (Section 4)
+submitted to the CPT in May, three areas were identified that remained
+to be better reconciled: 1) fitting to “extended” size composition data,
+2) calculation of the OFL and 3) priors and penalties applied to the
+model likelihood/objective function.</p>
+<p>Following the main report, the causes associated with the first
+issue, the differences between the two frameworks when fitting
+“extended” size compositions, were identified and GMACS code was updated
+with the result that extended size comps are now handled in identical
+fashion in both frameworks (for details, see the <a href="documents/TannerCrabReport_2026-05_Addendum.pdf">addendum</a> to
+the May report to the CPT). Discussion at the May CPT meeting concluded
+that the ~8% difference in OFLs calculated by the two frameworks, the
+basis for the second issue,was probably not unreasonable given the
+different algorithms used to determine the OFL in the two frameworks.
+Thus, the remaining bridging issue is to reconcile the priors and
+penalties applied in GMACS with those applied in TCSAM02 for this stock
+and to demonstrate model convergence in GMACS “to” the solution found by
+the TCSAM02 model. Given that one cannot reasonably expect the two
+solutions to be identical in all respects, given finite numerical
+precision if nothing else, the question becomes: how close if “good
+enough” and what criteria should be used to determine “close”.</p>
+</div>
+<div id="chionoecetes-spp.-hybrids" class="section level2">
+<h2><em>Chionoecetes spp.</em> Hybrids</h2>
+<p>Abundance and biomass estimates for Chionoecetes spp. hybrids
+(“hybrids”) in the 2025 NMFS EBS shelf bottom trawl survey were
+“unprecedented” across all sex/size/maturity categories (Zacher et
+al. 2026). Male crab ≥ 78 mm CW had a biomass estimate of 37,068 t,
+representing a 471% increase since 2024; it was also considerably higher
+than the previous 20-year average of 4,459 t. Twenty percent of all the
+Chionoecetes spp. males ≥ 101 mm CW in the eastern Bering Sea were
+hybrids. A peak of immature hybrid males was observed in the 50 – 90 mm
+range in the 2024 survey and many of these crab appeared to reach mature
+and legal size classes for snow crab in 2025. In addition, there were
+further large increases in juvenile size classes, portending future
+recruitment to those size classes. Hybrid males were found in highest
+abundance on the middle shelf to the east and northeast of the Pribilof
+Islands, with small male hybrids found further north than large male
+hybrids.</p>
+<p>The astonishing abundance of hybrids led to concerns expressed by
+stakeholders and reiterated by the CPT and SSC at their respective Fall,
+2025 meetings (CPT 2025, SSC 2025). Comments from stakeholders included
+questions about the ways in which hybrids are included or excluded from
+the Tanner crab OFL calculation, as well as the need for rapid action on
+developing a plan for incorporating hybrids into assessments and
+regulations such that harvesters can take advantage of the increasing
+abundance of hybrid males at industry-preferred sizes.</p>
+<p>As a preliminary step, Tanner and snow crab stock authors were asked
+to complete three model sensitivity runs (including size composition and
+abundance data):</p>
 <ul>
-<li><a href="presentations/HybridConsiderations.pdf">Hybrid
-considerations</a></li>
+<li>With hybrids included in survey data;</li>
+<li>With hybrids included in catch data;</li>
+<li>With hybrids included in both survey and catch data</li>
 </ul>
+<p>Results from this request are addressed in section 3 of the May 2026
+Tanner crab <a href="documents/TannerCrabReport_2026-05.pdf">report</a>
+(also referenced above) to the CPT. A link to the Tanner crab-specific
+portion of the presentation to the CPT is provided <a href="presentations/HybridConsiderations.pdf">here</a>. The entire
+presentation, including more information on survey results, fishery
+results, and results from snow crab model runs c an be found <a href="https://meetings.npfmc.org/CommentReview/DownloadFile?p=a1c76f9e-703a-477f-9128-447b1d6d6054.pdf&amp;fileName=PPT_Hybrid%20topics_052026.pdf">here</a>.</p>
+</div>
+<div id="side-by-side-selectivity-studies" class="section level2">
+<h2>Side-by-side selectivity studies</h2>
+<p>Side-by-side (SBS) trawling experiments were first conducted jointly
+by the National Marine Fisheries’ Alaska Science Center (NMFS AFSC) and
+the Bering Sea Fisheries Research Foundation (BSFRF) in the eastern
+Bering Sea (EBS) in 2009 and 2010 at standard NMFS EBS Shelf Survey
+stations in the northwest of the EBS shelf survey grid to characterize
+the selectivity of the NMFS bottom trawl survey gear for snow crab,
+<em>Chionoecetes opiliio</em> (Somerton et al. 2013). Similar studies
+were conducted in 2013, 2014, 2015, and 2016 in the southeastern EBS
+(Bristol Bay) to characterize the selectivity of the NMFS bottom trawl
+survey gear for red king crab (<em>Paralithodes camtschaticus</em>) and
+Tanner crab (<em>C. bairdi</em>), as well as further west on the EBS
+shelf in 2017 and 2018 to focus more specifically on Tanner and snow
+crab.</p>
+<p>In the current assessment model, annual survey biomass indices and
+size compositions from the BSFRF hauls are fit assuming they are
+absolute indices of abundance (i.e., <em>q</em> = 1) within the areas in
+which the BSFRF surveys were conducted. Incorporating these data into
+the assessment helps to determine the overall scale of the more
+comprehensive (in both space and time) relative indices provided by the
+NMFS EBS survey. An alternative approach to incorporating the BSFRF data
+into the assessment, rather than directly fitting the BSFRF biomass
+indices and size compositions in the model, has been to use the
+side-by-side, paired haul nature of the joint BSFRF-NMFS data to
+estimate the size selectivity of the NMFS gear outside the assessment
+model and use the results to inform survey selectivity within it. While
+not complete at this point, the CIE reviewers are asked to review the
+analysis to date and make recommendations on the steps needed to
+complete it (<a href="documents/TannerCrab_SBS_Analysis.pdf">link</a>).
+Of note, the linked draft tech memo includes a haul-level analysis of
+the data for male Tanner crab but not for females; the latter follows an
+approach similar to that taken for males but the relevant section has
+not been written.</p>
+<p>A presentation on the side-by-side selectivity studies is available
+<a href="presentations/SBS_Selectivity.pdf">here</a>.</p>
 </div>
 <div id="management-tier-system-and-proxies-for-f_msy-and-b_msy" class="section level2">
 <h2>Management Tier System and Proxies for <span class="math inline">\(F_{MSY}\)</span> and <span class="math inline">\(B_{MSY}\)</span></h2>
@@ -516,18 +646,49 @@ considerations</a></li>
 Aleutian Islands crab stocks is described <a href="documents/2025.SAFE_Intro_TierSystem.pdf">here</a>. The Tanner
 crab stock is assessed in Tier 3, which uses SPR-derived proxies for
 <span class="math inline">\(F_{MSY}\)</span> and <span class="math inline">\(B_{MSY}\)</span> to determine the federal
-overfishing limit (OFL) for the stock. For Tier 3, the proxies are <span class="math inline">\(F_{MSY} = F_{35\%}\)</span> and <span class="math inline">\(B_{MSY} = B_{35\%}\)</span>. The <a href="presentations/ReferencePointsAndTierConsiderations.pdf">presentation</a>
+overfishing limit (OFL) for the stock. For Tier 3, the proxies are <span class="math inline">\(F_{MSY} = F_{35\\%}\)</span> and <span class="math inline">\(B_{MSY} = B_{35\\%}\)</span>. The <a href="presentations/ReferencePointsAndTierConsiderations.pdf">presentation</a>
 will be used to motivate discussion on whether other SPR rates might be
 more appropriate for achieving sustainable harvest rates given a closer
 examination of Tanner crab life history.</p>
 </div>
 <div id="spatial-considerations-and-potential-stock-structure" class="section level2">
 <h2>Spatial considerations and potential stock structure</h2>
-<ul>
-<li><a href="presentations/SpatialConsiderations.pdf">Spatial
-considerations</a></li>
-</ul>
+<p>Federal fisheries management treats Tanner crab in the EBS as a
+single stock: the stock assessment model fits survey and fishery data
+aggregated across the entire shelf and produces a single OFL and ABC for
+the entire area. In contrast, the State of Alaska sets separate TACs for
+the areas east and west of 166<sup>o</sup>W longitude based on
+area-specific harvest control rules. While Tanner crab in the EBS are
+regarded as a single stock, the population exhibits
+environmentally-driven and perhaps simply random annual changes on top
+of a fair degree of consistent or slowly-varying spatial structure
+together with annual changes. The reviewers are asked to consider the
+brief introduction presented in this <a href="documents/TannerCrab_SpatialConsiderations.pdf">document</a> and
+consider whether future development of the assessment should
+quantitatively address spatial aspects of the stock. The figures are
+also provided in the <a href="presentations/SpatialConsiderations.pdf">Spatial
+considerations</a> presentation.</p>
 </div>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<p><a href="https://meetings.npfmc.org/CommentReview/DownloadFile?p=3506263a-4da3-4d77-aafb-ffbc694b69ef.pdf&amp;fileName=C3%20CPT%20Report.pdf">CPT
+Report 2025</a></p>
+<p><a href="https://meetings.npfmc.org/CommentReview/DownloadFile?p=bb3958b1-c8ca-42ab-9391-c5673c6e9872.pdf&amp;fileName=SSC%20Report%20Oct%202025_FINAL.pdf">SSC
+Report 2025</a></p>
+<p>Somerton, D.A., Weinberg, K.L., and Goodman, S.E. 2013. Catchability
+of snow crab (<em>Chionoecetes opilio</em>) by the eastern bering sea
+bottom trawl survey estimated using a catch comparison experiment. Can.
+J. Fish. Aquat. Sci. 70: 1699–1708. <a href="doi:dx.doi.org/10.1139/cjfas-2013-0100" class="uri">doi:dx.doi.org/10.1139/cjfas-2013-0100</a>.</p>
+<p>Thygesen,U.H., K. Kristensen, T. Jansen, J.E. Beyer. 2019.
+Intercalibration of survey methods using paired fishing operations and
+log-Gaussian Cox processes. ICES Journal of Marine Science,
+76:1189–1199. <a href="https://doi.org/10.1093/icesjms/fsy191" class="uri">https://doi.org/10.1093/icesjms/fsy191</a></p>
+<p>Zacher, L.S., Hennessey, S.M., Richar, J.I., Fedewa, E.J., Ryznar,
+E.R., and Litzow, M.A. 2026. The 2025 eastern and northern Bering Sea
+continental shelf trawl surveys: Results for commercial crab species.
+U.S. National Oceanic and Atmospheric Administration
+(NOAA).https://repository.library.noaa.gov/view/noaa/72630</p>
 </div>
 
 

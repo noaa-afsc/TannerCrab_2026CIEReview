@@ -1,2 +1,6 @@
 .DS_Store
 ~$*
+quarto/csv_ListForFiguresInfo.csv
+quarto/rda_ListForFigures.RData
+documents/Somerton1981_CJFAS.pdf
+quarto/q00_TannerCrab_SpatialConsiderations.pdf

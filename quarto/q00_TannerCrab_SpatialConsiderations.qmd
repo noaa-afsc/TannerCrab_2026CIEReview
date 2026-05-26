@@ -1,0 +1,285 @@
+---
+title: "Tanner crab Stock Structure and Spatial Considerations"
+author:
+- name: William T. Stockhausen
+  affiliations:
+    - id: afsc-refm
+      name: "Alaska Fisheries Science Center"
+      department: "Resource Ecology and Fisheries Management"
+      address: 
+        - "7600 Sand Point Way N.E."
+        - "Seattle, Washington 98115-6349"
+date: '`r format(Sys.time(), "%b %e, %Y")`'
+fontsize: 11pt 
+number-sections: true
+number-depth: 5
+reference-location: document
+reference-section-title: References
+bibliography: '`r path.expand("~/Work/Projects/Bibliography/AllRefs.bib")`'
+csl: '`r system.file("files/CJFAS.csl",package="wtsQMD")`'
+link-citations: true
+crossref:
+  chapters: false      # prepend label reference numbers by chater number?
+  fig-title: Figure    # for caption: default is "Figure")
+  tbl-title: Table     # for caption: default is "Table")
+  title-delim: "."     # for caption: default is ":")
+  fig-prefix: Figure   # for in-text (use [-@fig-ref] to drop prefix in text)
+  tbl-prefix: Table    # for in-text (use [-@tbl-ref] to drop prefix in text)
+  fig-labels: arabic    # options are arabic, roman, roman i, alpha x, alpha X; latter two starting from x/X
+  tbl-labels: arabic    # options are arabic, roman, roman i, alpha x, alpha X; latter two starting from x/X
+  subref-labels: alpha a # options are arabic, roman, roman i, alpha x, alpha X; latter two starting from x/X
+  ref-hyperlink: true    # references are hyperlinked if true
+format: 
+  html: 
+    df-print: paged
+    toc: true
+    toc-location: right
+    fig-width: 8
+    fig-asp: 0.4
+    fig-dpi: 100
+    embed-resources: true
+    include-in-header: 
+      - '`r system.file("files/in-line_math_mode.html",package="wtsQMD")`'
+  pdf:
+    documentclass: scrartcl
+    toc: false
+    fig_crop: false
+    keep-tex: false
+    fig-width: 6.5
+    fig-asp: 0.4
+    geometry:
+      - left=1.0in
+      - right=1.0in
+      - top=1.0in
+      - bottom=1.0in
+      - textwidth=6.5in
+      - showframe=false
+    include-in-header: 
+      - text: |
+          \usepackage{placeins}
+          \extrafloats{500}
+          \maxdeadcycles=10000
+          \usepackage{fontspec}
+          \usepackage{multicol}
+          \usepackage{hhline}
+          \newlength\Oldarrayrulewidth
+          \newlength\Oldtabcolsep
+      - file: '`r system.file("files/ltx_ExtraLatexIncludes.tex",package="wtsQMD")`'
+echo: false
+message: false
+warning: false
+results: 'hide'
+keep-md: false
+keep-yaml: false
+editor: source
+editor_options: 
+  chunk_output_type: console
+concordance: true
+params:
+  setup: !expr 'system.file("files/qmd_setup.R",package="wtsQMD")'
+  testing: false
+  reorderTables: false   #--issue with finding "range" of table values  (don't use)
+  reorderFigures: false  #--issue with finding "range" of figure values (don't use)
+---
+<!-- IMPORTANT: if used as a child doc, all chunk labels must be unique within the overall document -->
+
+<!-- 
+  NOTEs: 
+     * child_path$peek() gives path to current script.
+     * before starting a child document, do 
+         "child_path$push(file.path(child_path$peek(),rel_path))" first, 
+         where rel_path is the relative path to the child
+     * after a child document has finished, do "child_path$pop()" to return to current path value
+-->
+
+<!-- if not child doc, set up required objects -->
+```{r}
+#| label: SpatCon_setup
+#| eval: !expr '!knitr::opts_knit$get("child")'
+#| results: "asis"
+  testing = params$testing;
+  if (testing) cat(params$setup,"\n\n")
+  source(params$setup);
+  if (testing) cat("root = ",root,"\n\n")
+  reorderTables  = params$reorderTables;
+  reorderFigures = params$reorderFigures;
+```
+
+```{r}
+#| label: setup_SpatCon
+#| results: 'asis'
+  require(ggplot2);
+  require(kableExtra);
+  Sum = wtsUtilities::Sum;
+  old_thm = ggplot2::theme_set(cowplot::theme_cowplot(font_size = 10) +
+                               cowplot::background_grid() +
+                               cowplot::panel_border());
+  thm = wtsPlots::getStdTheme();
+  options("readr.show_col_types"=FALSE);
+  if (testing) cat("dirThs =",child_path$peek(),"\n\n")
+
+  if (rstudioapi::isAvailable()){
+    dirThs = dirname(rstudioapi::getSourceEditorContext()$path);
+  } else if (child_path$peek()!=""){
+    dirThs = child_path$peek();
+  } else {
+    dirThs = ".";
+  }
+  ##--NOTE: take out or modify the following as necessary
+#  if (!exists("s")){               #--need to explicitly load "s" again: "s" exists because mgcv has been loaded
+    # if (rstudioapi::isAvailable())
+    #   fn = file.path(rstudioapi::getActiveProject(),"rda_ProjectSetup.RData");
+    # if (child_path$peek()!="")
+    #   fn = file.path(child_path$peek(),"../../rda_ProjectSetup.RData");
+    # #--for debugging: ;
+    # if (file.exists(fn)) s = wtsUtilities::getObj(fn);
+#  }
+```
+
+Federal fisheries management treats Tanner crab in the EBS as a single stock: the stock assessment model [@TannerCrab2025] fits survey and fishery data aggregated across the entire shelf and produces a single OFL and ABC for the entire area. In contrast, the State of Alaska sets separate TACs for the areas east and west of 166^o^W longitude ([@fig-SpatCon-EW1-Areas]) based on area-specific harvest control rules.
+
+While Tanner crab in the EBS are regarded as a single stock, the population exhibits environmentally-driven and perhaps simply random annual changes on top of a fair degree of consistent or slowly-varying spatial structure together with annual changes. Patterns for immature males, immature females, and perhaps mature females may be excluded from areas on the middle shelf by the cold pool, an annually-varying region of cold bottom water temperatures (Figures [-@fig-SpatCon-EW2a-MaleSpatPats] and  [-@fig-SpatCon-EW2b-FemaleSpatPats]). Patterns for older crab (larger males and industry-preferred males, adult females) do not reflect earlier patterns of smaller crab, suggesting ontogenetic movement or spatially-varying mortality rates (Figures [-@fig-SpatCon-EW2a-MaleSpatPats] and  [-@fig-SpatCon-EW2b-FemaleSpatPats]). However, at least visually, the 166^o^W longitude line does seem to represent a line of some sort of demarcation. This become more evident when the spatial patterns are averaged over time (e.g., MMB in [@fig-SpatCon-EW3-MMB]). Further, the relative proportion of population in the areas east and west of 166^o^W has changed with time, with population biomass components exhibiting shifts westward ([@fig-SpatCon-EW4-SurveyIndices]), although population characteristics within the delineated areas have remained reasonably distinct, e.g.: the ratio of smaller and old shell males to industry-preferred males has always been larger in the western area while the proportion mature-at-size for males is almost always larger in the eastern area (Figures [-@fig-SpatCon-EW5-RatioIPM] and [-@fig-SpatCon-EW6-PropMat], respectively).  
+
+Area-specific progressions in survey size compositions suggest that recruitment may be synchronous across both areas ([@fig-SpatCon-EW7-MaleZCs]), although simulated patterns of larval dispersal suggest that Tanner crab in Bristol Bay may be somewhat isolated from other areas on the shelf, and that this component of the stock relies heavily on local retention of larvae for recruitment ([@fig-SpatCon-EW8-LarvalTransport]), suggesting that Tanner crab on the shelf may exist as a metapopulation of weakly-connected sub-stocks [@RicharEtAl2015]. 
+
+The clinal differences across the EBS shelf in these and other biological characteristics have led some authors to argue for a division into separate eastern and western stocks in the EBS [@Somerton1981b; @Zheng2008; @ZhengAndPengilly2011]. However, it was not generally recognized at the time these arguments were made that both sexes of this species undergoes a terminal molt to maturity [@TamoneEtAl2007], nor were the implications of ontogenetic movement considered. Thus, biological characteristics estimated using comparisons of length frequency distributions across the range of the stock, or on modal length analysis over time, may be confounded as a result and do not provide definitive evidence of stock structure. Indeed, a recent genetic analysis failed to distinguish multiple non-intermixing, non-interbreeding sub-stocks on the EBS shelf [@Johnson2019].
+
+The lack of genetic stock structure, however, does not mean that the evident spatial structure is not without population-dynamic consequences. However, addressing spatial structure quantitatively in the stock assessment would require information on potentially environmentally-driven patterns of recruitment and ontogenetic movement across the EBS that we sadly lack at the moment. Given current constraints on research funds and personnel, a very strong case would need to be made to move the assessment in this direction. We welcome comments on what level of priority this aspect of the assessment should be given and, if considered a high priority, suggestions on how to move forward.
+
+```{r}
+#| label: fig_SpatCon-EW1-Areas
+#| results: asis
+  lbl = wtsQMD::getLabel();
+  fn = wtsQMD::getImageFN(file.path(dirThs,"EW1_ADFG_166W.pdf"));
+  cap = paste0("State of Alaska Tanner crab fishing areas in the Bering Sea District.");
+  lstFigs = c(lstFigs,wtsQMD::printGGplot(NULL,lbl=lbl,pth=fn,cap=cap,ori="P"));
+  rm(lbl,fn,cap);
+```
+
+```{r}
+#| label: fig_SpatCon-EW2a-MaleSpatPats
+#| results: asis
+#| fig-width: 9
+  lbl = wtsQMD::getLabel();
+  fn = wtsQMD::getImageFN(file.path(dirThs,"EW2a_MaleSpatPats.pdf"));
+  cap = paste0("Spatial patterns from recent NMFS EBS trawl surveys for male Tanner crab classes: ",
+               "small males (< 60 mm CW); large males (> 60 mm CW); industry-preferred males (IPMs, > 125 mm CW). ",
+               "Note that the scaling within a crab class is the same across years, but different classes are ",
+               "scaled differently to show better detail.");
+  lstFigs = c(lstFigs,wtsQMD::printGGplot(NULL,lbl=lbl,pth=fn,cap=cap,ori="L"));
+```
+
+```{r}
+#| label: fig_SpatCon-EW2b-FemaleSpatPats
+#| results: asis
+#| fig-width: 9
+  lbl = wtsQMD::getLabel();
+  fn = wtsQMD::getImageFN(file.path(dirThs,"EW2b_FemaleSpatPats.pdf"));
+  cap = paste0("Spatial patterns from recent NMFS EBS trawl surveys for female Tanner crab classes: ",
+               "immature females and mature females. ",
+               "Note that the scaling within a crab class is the same across years, but different classes are ",
+               "scaled differently to show better detail.");
+  lstFigs = c(lstFigs,wtsQMD::printGGplot(NULL,lbl=lbl,pth=fn,cap=cap,ori="L"));
+```
+
+```{r}
+#| label: fig_SpatCon-EW3-MMB
+#| results: asis
+#| fig-width: 9
+  lbl = wtsQMD::getLabel();
+  fn = wtsQMD::getImageFN(file.path(dirThs,"EW3_MMB.pdf"));
+  cap = paste0("Spatial patterns of mature male biomass (MMB) in the NMFS EBS Trawl Survey ",
+               "averaged over 1975-2014 (left) and 2015-2019 (right). Symbol sizes reflect ",
+               "percentage caught at station location. Courtesy of Ben Daily (ADFG).");
+  lstFigs = c(lstFigs,wtsQMD::printGGplot(NULL,lbl=lbl,pth=fn,cap=cap,ori="L"));
+```
+
+```{r}
+#| label: fig_SpatCon-EW4-SurveyIndices
+#| results: asis
+#| fig-width: 9
+  lbl = wtsQMD::getLabel();
+  fn = wtsQMD::getImageFN(file.path(dirThs,"EW4_SurveyIndices.pdf"));
+  cap = paste0("Time series of estimated survey biomass by areas E/W of 166^o^W from the NMFS EBS Trawl Survey for ",
+               "females (top), all males (middle), and industry-preferred males (> 125 mm CW, bottom).");
+  lstFigs = c(lstFigs,wtsQMD::printGGplot(NULL,lbl=lbl,pth=fn,cap=cap,ori="L"));
+```
+
+```{r}
+#| label: fig_SpatCon-EW5-RatioIPM
+#| results: asis
+  lbl = wtsQMD::getLabel();
+  fn = wtsQMD::getImageFN(file.path(dirThs,"EW5_RatioIPM.pdf"));
+  cap = paste0("Time series of the ratio of the abundance of industry-preferred males (IPMs, > 125 mm CW) to smaller males ",
+               "by areas E/W of 166^o^W, based on NMFS EBS Trawl Survey data. Courtesy of Ben Daily (ADFG).");
+  lstFigs = c(lstFigs,wtsQMD::printGGplot(NULL,lbl=lbl,pth=fn,cap=cap,ori="P"));
+```
+
+```{r}
+#| label: fig_SpatCon-EW6-PropMat
+#| results: asis
+  lbl = wtsQMD::getLabel();
+  fn = wtsQMD::getImageFN(file.path(dirThs,"EW6_PropMat.pdf"));
+  cap = paste0("Annual fits of logistic curves to the proportion of mature new shell males to all new shell males ",
+               "in the NMFS EBS Trawl Survey by areas west (top graph) and east (bottom graph) of 166^o^W. ",
+               "From Zacher et al. 2026.");
+  lstFigs = c(lstFigs,wtsQMD::printGGplot(NULL,lbl=lbl,pth=fn,cap=cap,ori="P"));
+```
+
+```{r}
+#| label: fig_SpatCon-EW7-MaleZCs
+#| results: asis
+#| fig-width: 9
+  lbl = wtsQMD::getLabel();
+  fn = wtsQMD::getImageFN(file.path(dirThs,"EW7_MaleZCs.pdf"));
+  cap = paste0("Male survey size compositions by areas E/W of 166^o^W from the NMFS EBS Trawl Survey. ",
+               "Vertical boxes indicate potentially-synchronous recruitment events.");
+  lstFigs = c(lstFigs,wtsQMD::printGGplot(NULL,lbl=lbl,pth=fn,cap=cap,ori="L"));
+```
+
+```{r}
+#| label: fig_SpatCon-EW8-LarvalTransport
+#| results: asis
+#| fig-width: 9
+  lbl = wtsQMD::getLabel();
+  fn = wtsQMD::getImageFN(file.path(dirThs,"EW8_LarvalTransport.pdf"));
+  cap = paste0("Left four graphs: trends for floats released in the eastern subdistrict. ",
+                "The fate of floats released in the eastern subdistrict in terms of rates of: ",
+                "(a) retention in eastern subdistrict, (b) advection more than 1^o^ longitude west of 166^o^W, ",
+                "(c) advection more than 2^o^ longitude west of 166^o^W, and ",
+                "(d) advection more than 3^o^ longitude west of 166^o^W. ",
+               "Right four graphs: trends for floats released in the western subdistrict. ",
+                "The fate of floats released in the western subdistrict in terms of rates of: ",
+                "(a) retention in western subdistrict, (b) advection more than 1^o^ longitude east of 166^o^W, ",
+                "(c) advection more than 2^o^ longitude east of 166^o^W, and ",
+                "(d) advection more than 3^o^ longitude east of 166^o^W.");
+  lstFigs = c(lstFigs,wtsQMD::printGGplot(NULL,lbl=lbl,pth=fn,cap=cap,ori="L"));
+```
+
+
+```{r SpatCon-Cleanup}
+  #rm(dfrDat,grdPrd);
+```
+
+<!-- references -->
+```{r,eval=!knitr::opts_knit$get("child")&(!isPDF),results='asis'}
+  cat("# References {-}\n");
+  cat("::: {#refs}\n");
+  cat(":::\n\n");
+```
+
+<!-- tables, if not child doc and lstTbls is not empty -->
+```{r}
+#| label: tables_SpatCon
+#| eval: !expr '!knitr::opts_knit$get("child")'
+#| results: asis
+  source(system.file("files/printTablesSectionFromList.R",package="wtsQMD"));
+```
+
+<!-- figures, if not child doc and lstFigs is not empty -->
+```{r}
+#| label: figures_SpatCon
+#| eval: !expr '!knitr::opts_knit$get("child")'
+#| results: asis
+  source(system.file("files/printFiguresSectionFromList.R",package="wtsQMD"));
+```

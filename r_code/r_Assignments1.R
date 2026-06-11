@@ -1,4 +1,4 @@
-#--CIE Review assignaments: Day 1
+#--CIE Review assignments: Day 1
 #--"Active Project" should be 2026-05_TannerCrab
 require(ggplot2);
 
@@ -7,7 +7,7 @@ fn = file.path(rstudioapi::getActiveProject(),paste0("rda_project_info.",wtsUtil
 s = wtsUtilities::getObj(fn);
 
 #--load 2025 assessment model----
-lstT = wtsUtilities::getObj(s$results$TCSAM1)
+lstT = wtsUtilities::getObj(s$results$Asmt2025)
 
 #--plot growth matrices + mean growth (not an assignment)----
 plst = rCompTCMs::compareResults.Pop.MeanGrowthPlusProbs(list(tcsam=lstT));

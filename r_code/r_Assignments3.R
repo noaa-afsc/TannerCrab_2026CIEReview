@@ -40,7 +40,8 @@ dfrRAfxmz = rTCSAM02::getMDFR.Fisheries.CatchAbundance(lstT,category="retained",
              dplyr::select(fleet,y,x,m,z,val) |> 
              dplyr::mutate(y=as.numeric(y),z=as.numeric(z),category="retained catch",type="abundance");
 ##--combine above
-dfrPCAxmz = dplyr::bind_rows(dfrPAfxmz,dfrCAfxmz,dfrRAfxmz);
+dfrPCAfxmz = dplyr::bind_rows(dfrPAfxmz,dfrCAfxmz,dfrRAfxmz);
+readr::write_csv(dfrPCAfxmz,"Abundance_Pop-TotCatchMort-RetCatch.csv")
 rm(dfrPAfxmz,dfrCAfxmz,dfrRAfxmz);
 
 ##--extract model-estimated recruitment and spawning stock biomass----
@@ -51,3 +52,4 @@ dfrR_SSB = rTCSAM02::getMDFR.SdRep.RecAndSSB(lstT) |>
                            lci=ifelse(variable=="lnRec",exp(lci)/scl,lci),
                            uci=ifelse(variable=="lnRec",exp(uci)/scl,uci),
                            variable=ifelse(variable=="lnRec","R",paste(x,"MB")));
+readr::write_csv(dfrR_SSB,"RecAbundance_MatureBiomass.csv");
